@@ -56,25 +56,9 @@ class AuthenticatedSessionController extends Controller
     {
 
         $request->authenticate();
-        // print_r($request->all());
-        // dd('+++++');
+        
         $request->session()->regenerate();
-        //
-        $operatorsServices=UsersOperatorsServices::GetOperaterServiceByUserId(Auth::user()->id)->get();
-        $operators=array_unique($operatorsServices->pluck('id_operator')->toArray());
-        $services=array_unique($operatorsServices->pluck('id_service')->toArray());
-        $userOperatorService=['id_operators' => $operators,'id_services'=>$services];
-        // dd($userOperatorService);
-        // dd($operatorsServices->pluck('id_operator',));
-        // $operators=role_operators::select('operator_id')->GetRoleOperator($role_id)->pluck('operator_id')->toArray();
-        if(!empty($operators) && !empty($services))
-        {
-            session(['userOperatorService'=>$userOperatorService]);
-        }
-        // else{
-
-        //     session(['id_operator' => [1,2,3,4]]);
-        // }
+       
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
