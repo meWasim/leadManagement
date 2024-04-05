@@ -139,9 +139,13 @@ Route::prefix('management')->middleware(['auth', 'XSS',])->group(function () {
 
 
 
-Route::prefix('activity')->group(function () {
-    Route::get('/user', 'ActivityLogController@user')->name('activity.user')->middleware(['auth', 'XSS',]);
-    Route::get('/system', 'ActivityLogController@system')->name('activity.system')->middleware(['auth', 'XSS',]);
+Route::prefix('leads')->group(function () {
+    Route::get('/', 'LeadController@index')->name('leads.index')->middleware(['auth', 'XSS',]);
+    Route::get('/create', 'LeadController@create')->name('leads.create')->middleware(['auth', 'XSS',]);
+    Route::post('/store', 'LeadController@store')->name('leads.store')->middleware(['auth', 'XSS',]);
+    Route::post('/destroy', 'LeadController@delete')->name('leads.destroy')->middleware(['auth', 'XSS',]);
+
+    
 });
 
 
