@@ -64,7 +64,11 @@
         </li>
         @endcan
         @endif
-
+        <li class="nav-item">
+            <a class="nav-link {{ (Request::route()->getName() == 'leads.index') ? 'active' : '' }}" href="{{route('leads.index')}}">
+                <i class="fas fa-user-cog"></i>{{__('Leads')}}
+            </a>
+        </li>
 
         <li class="nav-item">
             <a href="{{ route('logout') }}" class="nav-link dropdown-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
