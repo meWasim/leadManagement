@@ -37,7 +37,7 @@
                     @endcan
                     <div class="collapse {{ (Request::route()->getName() == 'management.user' || Request::route()->getName() == 'management.revShare' || Request::route()->getName() == 'management.companyAssign' || Request::route()->getName() == 'management.company' || Request::route()->getName() == 'management.currency' || Request::route()->getName() == 'management.operator' || Request::route()->getName() == 'project.management' || Request::route()->getName() == 'users' )  ? 'show' : '' }}" id="navbar-getting-started-management">
                         <ul class="nav flex-column submenu-ul">
-                          
+
                             @if(Gate::check('Manage Users') || Gate::check('Manage Clients') || Gate::check('Manage Roles') || Gate::check('Manage Permissions'))
                             @if((\Auth::user()->type == 'Business Owner') || (\Auth::user()->type == 'Administrator') || (\Auth::user()->type == 'Owner'))
                             @can('Manage Users')
@@ -49,34 +49,34 @@
                             @endcan
                             @endif
                             @endif
-                          
-                          
+
+
+                        </ul>
+                    </div>
+                </li>
+                @endif
+                @if((\Auth::user()->type == 'Owner'))
+                @can('Manage Roles')
+                <li class="nav-item">
+                    <a class="nav-link {{ (Request::route()->getName() == 'roles.index') ? 'active' : '' }}" href="{{route('roles.index')}}">
+                        <i class="fas fa-user-cog"></i>{{__('Roles')}}
+                    </a>
+                </li>
+                @endcan
+                @endif
+                <li class="nav-item">
+                    <a class="nav-link {{ (Request::route()->getName() == 'leads.index') ? 'active' : '' }}" href="{{route('leads.index')}}">
+                        <i class="fas fa-user-cog"></i>{{__('Leads')}}
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('logout') }}" class="nav-link dropdown-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>{{__('Logout')}}</span>
+                    </a>
+                </li>
             </ul>
         </div>
-        </li>
-        @endif
-        @if((\Auth::user()->type == 'Owner'))
-        @can('Manage Roles')
-        <li class="nav-item">
-            <a class="nav-link {{ (Request::route()->getName() == 'roles.index') ? 'active' : '' }}" href="{{route('roles.index')}}">
-                <i class="fas fa-user-cog"></i>{{__('Roles')}}
-            </a>
-        </li>
-        @endcan
-        @endif
-        <li class="nav-item">
-            <a class="nav-link {{ (Request::route()->getName() == 'leads.index') ? 'active' : '' }}" href="{{route('leads.index')}}">
-                <i class="fas fa-user-cog"></i>{{__('Leads')}}
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a href="{{ route('logout') }}" class="nav-link dropdown-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>{{__('Logout')}}</span>
-            </a>
-        </li>
-        </ul>
     </div>
-</div>
 </div>
