@@ -37,7 +37,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                           
+                        @foreach ($data as $dt)
+                                <tr>
+                                    <td>{{ $dt->name }}</td>
+                                    <td>
+                                        <!-- Actions for each branch -->
+                                    </td>
+                                    <td class="Action">
+                                    <a href="javascript:void(0)" data-url="#" data-size="lg" data-ajax-popup="true" data-title="{{__('Edit Merchant #')}}"  class="edit-icon"><i class="fas fa-pencil-alt"></i>
+                                    </a>
+
+                                   
+
+                                    <form id="deleteForm" method="POST" action="#">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="#" class="edit-icon" data-confirm="{{ __('Are you sure you want to delete this merchant?') }}" data-confirm-yes="document.getElementById('deleteForm').submit();" data-toggle="tooltip"  style="background-color: red;">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </form>
+
+
+
+                                </td>
+                                </tr>
+                            @endforeach
                            
                         </tbody>
                     </table>

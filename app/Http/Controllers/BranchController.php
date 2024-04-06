@@ -15,7 +15,7 @@ class BranchController extends Controller
     public function index()
     {
         $data=Branch::all();
-        dd( $data);
+       
         return view('branch.branch_list',compact('data'));
 
     }
