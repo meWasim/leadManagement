@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-{{ __('Manage Operator') }}
+{{ __('Manage Lead') }}
 @endsection
 
 @section('action-button')
@@ -22,7 +22,7 @@
 
 
 
-<h4 class="h4 font-weight-400 float-left modal-title mb-2 ml-2">Add Operator</h4>
+<h4 class="h4 font-weight-400 float-left modal-title mb-2 ml-2">Add Lead</h4>
 <div class="card shadow-sm mt-0">
     <div class="card-body">
         <form action="{{route('leads.store')}}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
@@ -142,13 +142,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
-                    <div class="form-group field-orev-share required has-success">
-                        <label class="control-label" for="user_id">user_id</label>
-                        <input type="number" id="user_id" class="form-control" name="user_id" value="{{old('user_id')}}" placeholder="Enter user_id" required>
-                        <div class="invalid-feedback">Please enter user_id.</div>
-                    </div>
-                </div>
+             
 
                 
 
