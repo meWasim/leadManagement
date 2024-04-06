@@ -143,9 +143,9 @@ Route::prefix('leads')->group(function () {
     Route::get('/', 'LeadController@index')->name('leads.index')->middleware(['auth', 'XSS',]);
     Route::get('/create', 'LeadController@create')->name('leads.create')->middleware(['auth', 'XSS',]);
     Route::post('/store', 'LeadController@store')->name('leads.store')->middleware(['auth', 'XSS',]);
-    Route::post('/destroy', 'LeadController@delete')->name('leads.destroy')->middleware(['auth', 'XSS',]);
-
-    
+    Route::delete('/destroy/{id}', 'LeadController@destroy')->name('leads.destroy')->middleware(['auth', 'XSS',]);
+    Route::get('/edit/{id}' ,'LeadController@edit')->name('leads.edit')->middleware(['auth', 'XSS',]);
+    Route::post('update/{id}','LeadController@update')->name('leads.update')->middleware(['auth', 'XSS']);
 });
 
 

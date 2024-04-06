@@ -70,18 +70,19 @@ Session::flash('error', $error);
                                     <td>{{ $lead->NextFollowUpDate }}</td>
                                     <td>{{ $lead->Remarks }}</td>
                                     <td>
-                                        @can('Edit Lead')
-                                        <a href="{{route('leads.edit', $lead->id)}}" class="edit-icon"><i class="fas fa-pencil-alt"></i></a>
-                                        @endcan
-                                        <form action="{{route('leads.destroy', $lead->id)}}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            @can('Delete Lead')
-                                            <button class="delete-icon" style="border: none;"><i class="fas fa-trash"></i></button>
-                                            @endcan  
-                                        </form>
-                                    </td>
-                                </tr>
+                                    <td>
+          
+                <a href="{{ route('leads.edit', $lead->id) }}" class="edit-icon"><i class="fas fa-pencil-alt"></i></a>
+            
+
+            <form action="{{ route('leads.destroy', $lead->id) }}" method="post" style="display: inline;">
+                @csrf
+                @method('DELETE')
+                
+                <button type="submit" class="delete-icon" style="border: none;"><i class="fas fa-trash"></i></button>
+            </form>
+</td>
+
                                 @endforeach
                             </tbody>
                         </table>

@@ -23,6 +23,7 @@ class LeadController extends Controller
 
     public function store(Request $request)
     {
+        
         try {
             Lead::create([
                 'Date' => $request->input('Date'),
@@ -38,7 +39,7 @@ class LeadController extends Controller
                 'Service' => $request->input('Service'),
                 'NextFollowUpDate' => $request->input('NextFollowUpDate'),
                 'Remarks' => $request->input('Remarks'),
-                'user_id' => $request->input('user_id'),
+                'user_id' =>\Auth::user()->id,
             ]);
     
             return redirect()->route('leads.index')->with('success', 'Lead created successfully.');
@@ -58,34 +59,42 @@ class LeadController extends Controller
 
     public function edit($id)
     {
+        $branc=Branch::select('id','name')->get();
         $lead = Lead::findOrFail($id);
-        return view('leads.edit', compact('lead'));
+        return view('leads.edit', compact('lead','branc'));
     }
 
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'Date' => 'nullable|date',
-            'Branch' => 'nullable|string',
-            'ResourceID' => 'nullable|string',
-            'CompanyName' => 'nullable|string',
-            'ContactPerson' => 'nullable|string',
-            'MobileNumber' => 'nullable|string|max:15',
-            'MailId' => 'nullable|string',
-            'Address' => 'nullable|string',
-            'PinCode' => 'nullable|string|max:10',
-            'Product' => 'nullable|string',
-            'Service' => 'nullable|string',
-            'NextFollowUpDate' => 'nullable|date',
-            'Remarks' => 'nullable|string',
-            'user_id' => 'nullable|exists:users,id',
-        ]);
-
         $lead = Lead::findOrFail($id);
-        $lead->update($validatedData);
+  
+        try {
+            $lead->update([
+                'Date' => $request->input('Date'),
+                'Branch' => $request->input('Branch'),
+                'ResourceID' => $request->input('ResourceID'),
+                'CompanyName' => $request->input('CompanyName'),
+                'ContactPerson' => $request->input('ContactPerson'),
+                'MobileNumber' => $request->input('MobileNumber'),
+                'MailId' => $request->input('MailId'),
+                'Address' => $request->input('Address'),
+                'PinCode' => $request->input('PinCode'),
+                'Product' => $request->input('Product'),
+                'Service' => $request->input('Service'),
+                'NextFollowUpDate' => $request->input('NextFollowUpDate'),
+                'Remarks' => $request->input('Remarks'),
+                'user_id' =>\Auth::user()->id,
+            ]);
+    
+            return redirect()->route('leads.index')->with('success', 'Lead update successfully.');
+    
+        } catch (\Exception $e) {
+            \Log::error('Error updating lead: ' . $e->getMessage());
+    
+            return redirect()->back()->with('error', 'Error update lead. Please try again.');
+        }
 
-        return redirect()->route('leads.index')->with('success', 'Lead updated successfully.');
-    }
+           }
 
     public function destroy($id)
     {
